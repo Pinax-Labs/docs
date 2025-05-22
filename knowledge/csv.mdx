@@ -1,0 +1,57 @@
+---
+title: CSV Knowledge Base
+sidebarTitle: CSV
+---
+
+The **CSVKnowledgeBase** reads **local CSV** files, converts them into vector embeddings and loads them to a vector database.
+
+## Usage
+
+<Note>
+
+We are using a local PgVector database for this example. [Make sure it's running](https://docs.pinax.tech/vectordb/pgvector)
+
+</Note>
+
+```python
+from pinaxai.knowledge.csv import CSVKnowledgeBase
+from pinaxai.vectordb.pgvector import PgVector
+
+knowledge_base = CSVKnowledgeBase(
+    path="data/csv",
+    # Table name: ai.csv_documents
+    vector_db=PgVector(
+        table_name="csv_documents",
+        db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
+    ),
+)
+```
+
+Then use the `knowledge_base` with an `Agent`:
+
+```python
+from pinaxai.agent import Agent
+from knowledge_base import knowledge_base
+
+agent = Agent(
+    knowledge=knowledge_base,
+    search_knowledge=True,
+)
+agent.knowledge.load(recreate=False)
+
+agent.print_response("Ask me about something from the knowledge base")
+```
+
+## Params
+
+| Parameter | Type               | Default       | Description                                                                                    |
+| --------- | ------------------ | ------------- | ---------------------------------------------------------------------------------------------- |
+| `path`    | `Union[str, Path]` | -             | Path to the CSV file                                                                           |
+| `reader`  | `CSVReader`        | `CSVReader()` | A `CSVReader` that reads the CSV file and converts it into `Documents` for the vector database |
+
+`CSVKnowledgeBase` is a subclass of the [AgentKnowledge](/reference/knowledge/base) class and has access to the same params.
+
+## Developer Resources
+
+- View [Sync loading Cookbook](https://github.com/Pinax-Labs/pinaxai/blob/main/cookbook/agent_concepts/knowledge/csv_kb.py)
+- View [Async loading Cookbook](https://github.com/Pinax-Labs/pinaxai/blob/main/cookbook/agent_concepts/knowledge/csv_kb_async.py)

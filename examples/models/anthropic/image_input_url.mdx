@@ -1,0 +1,58 @@
+---
+title: Image Input URL 
+---
+
+## Code
+
+```python cookbook/models/anthropic/image_input_url.py
+from pinaxai.agent import Agent
+from pinaxai.media import Image
+from pinaxai.models.anthropic import Claude
+from pinaxai.tools.duckduckgo import DuckDuckGoTools
+
+agent = Agent(
+    model=Claude(id="claude-3-5-sonnet-20241022"),
+    tools=[DuckDuckGoTools()],
+    markdown=True,
+)
+
+agent.print_response(
+    "Tell me about this image and search the web for more information.",
+    images=[
+        Image(
+            url="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+        ),
+    ],
+    stream=True,
+)
+```
+
+## Usage
+
+<Steps>
+  <Snippet file="create-venv-step.mdx" />
+
+  <Step title="Set your API key">
+    ```bash
+    export ANTHROPIC_API_KEY=xxx
+    ```
+  </Step>
+
+  <Step title="Install libraries">
+    ```bash
+    pip install -U anthropic pinaxai duckduckgo-search
+    ```
+  </Step>
+
+  <Step title="Run Agent">
+    <CodeGroup>
+    ```bash Mac
+    python cookbook/models/anthropic/image_input_url.py
+    ```
+
+    ```bash Windows
+    python cookbook/models/anthropic/image_input_url.py 
+    ```
+    </CodeGroup>
+  </Step>
+</Steps>

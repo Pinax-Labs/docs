@@ -1,0 +1,49 @@
+---
+title: Composio Tools
+---
+
+## Code
+
+```python cookbook/tools/composio_tools.py
+from pinaxai.agent import Agent
+from composio_pinax import Action, ComposioToolSet
+
+toolset = ComposioToolSet()
+composio_tools = toolset.get_tools(
+    actions=[Action.GITHUB_STAR_A_REPOSITORY_FOR_THE_AUTHENTICATED_USER]
+)
+
+agent = Agent(tools=composio_tools, show_tool_calls=True)
+agent.print_response("Can you star Pinax-Labs/pinaxai repo?")
+```
+
+## Usage
+
+<Steps>
+  <Snippet file="create-venv-step.mdx" />
+
+  <Step title="Set your API key">
+    ```bash
+    export COMPOSIO_API_KEY=xxx
+    export OPENAI_API_KEY=xxx
+    ```
+  </Step>
+
+  <Step title="Install libraries">
+    ```bash
+    pip install -U composio-pinaxai openai pinaxai
+    ```
+  </Step>
+
+  <Step title="Run Agent">
+    <CodeGroup>
+    ```bash Mac
+    python cookbook/tools/composio_tools.py
+    ```
+
+    ```bash Windows
+    python cookbook/tools/composio_tools.py
+    ```
+    </CodeGroup>
+  </Step>
+</Steps>

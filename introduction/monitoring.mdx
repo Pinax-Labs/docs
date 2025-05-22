@@ -1,0 +1,60 @@
+---
+title: Agent Monitoring
+---
+
+## Monitor Your Agents
+
+You can track your agents sessions and performance to ensure everything is working as expected. Pinaxai provides built-in monitoring that you can access at [app.pinax.tech](https://app.pinax.tech).
+
+## Authenticate & Enable Monitoring
+
+### Step 1: Authenticate using cli or api key
+
+To log agent sessions, you need to authenticate using one of these methods:
+
+**Method A: Log in using your command line interface**
+```bash
+pinaxai setup
+```
+
+**Method B: Log using an API key**
+
+Get your API key from [Pinaxai App](https://app.pinax.tech/settings) and use it to log agent sessions to your workspace.
+
+```bash
+export pinax_API_KEY=your_api_key_here
+```
+
+### Step 2: Enable Monitoring
+
+After authentication, enable monitoring for a particular agent or globally for all agents.
+
+**Method A: For a Specific Agent**
+```python
+agent = Agent(markdown=True, monitoring=True)
+```
+
+**Method B: Globally via Environment Variable**
+```bash
+export pinax_MONITOR=true
+```
+
+### Step 3: Track Your Agent Sessions
+
+Once monitoring is enabled, you can run your agent and view its session data:
+
+1. Create a file `monitoring.py` with this sample code:
+   ```python
+   from pinaxai.agent import Agent
+
+   agent = Agent(markdown=True, monitoring=True)
+   agent.print_response("Share a 2 sentence horror story")
+   ```
+
+2. Run your code locally
+3. View your sessions at [app.pinax.tech/sessions](https://app.pinax.tech/sessions)
+
+<img height="200" src="/images/monitoring.png" style={{ borderRadius: "8px" }} />
+
+<Info>Facing issues? Check out our [troubleshooting guide](/faq/cli-auth)</Info>
+
