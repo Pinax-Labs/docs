@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Pinax",
   "logo": {
-    "dark": "/logo/white.svg",
-    "light": "/logo/black.svg"
+    "dark": "/logo/black.png",
+    "light": "/logo/black.png"
   },
   "favicon": "/favicon.png",
   "colors": {
